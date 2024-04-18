@@ -47,7 +47,7 @@ void	ft_wait(t_shell *shell)
 {
 	while (errno != ECHILD)
 	{
-		if (wait(&shell->status) == shell->last_pid)
+		if (waitpid(-1, &shell->status, 0) == shell->last_pid)
 		{
 			if (WIFEXITED(shell->status))
 				shell->exit_code = WEXITSTATUS(shell->status);
@@ -164,6 +164,7 @@ int	main(int argc, char **argv, char **env)
 		j = 0;
 		shell.cmd_tab[0] = NULL;
 		shell.is_first = 1;
+		shell.last_pid = -1;
 		while (argv[i] != NULL && strcmp(argv[i], ";"))
 		{
 			if (strcmp(argv[i], "|") == 0)
