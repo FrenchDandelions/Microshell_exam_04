@@ -46,7 +46,6 @@ void	child(int tmp_fd, char **argv, int i, char **envp)
 
 void	cd(char **argv, int i)
 {
-	argv[i] = NULL;
 	if (argv[0] && argv[1] && !argv[2])
 	{
 		if (chdir(argv[1]))
